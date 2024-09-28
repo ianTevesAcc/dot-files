@@ -20,7 +20,19 @@ export RBENV_ROOT="$HOME/.rbenv"                                          # path
 export PATH="$RBENV_ROOT/shims:/versions:$PATH"                           # path to rbenv versions
 export PATH="/home/linuxbrew/.linuxbrew/share/emacs/site-lisp/ruby:$PATH" # path to ruby
 export PATH="/home/linuxbrew/.linuxbrew/lib/ruby/gems/3.3.0/bin:$PATH"    # path to ruby bin
+export PATH="/home/ian/node_modules/.bin:$PATH"                           # path to node modules bin
+export PATH="/home/ian/node_modules/.bin/neovim-node-host:$PATH"          # path to npm nvim host
+export PATH="/snap/bin:$PATH"                                             # path to snap bin
 
+# Colour correct TERM - Check TERM color with `echo $TERM`
+# export TERM='xterm-256color'
+# export EDITOR='nvim'
+# export VISUAL='nvim'
+
+# Ibus Fix
+export GTK_IM_MODULE=xim #Fix for Chrome
+export QT_IM_MODULE=xim #Not sure if this works or not, but whatever
+export XMODIFIERS=@im=ibus
 
 # ZINIT CONFIG ---
 # Download Zinit if not found
@@ -33,7 +45,7 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"
 
 # ZSH Plugins
-zinit ice depth=1; zinit light romkatv/Powerlevel10k  # add PowerLevel10k 
+zinit ice depth=1; zinit light romkatv/Powerlevel10k  # add PowerLevel10k
 zinit light zsh-users/zsh-syntax-highlighting         # add ZSH Syntax Highlighting
 zinit light zsh-users/zsh-completions                 # add ZSH Completions
 zinit light zsh-users/zsh-autosuggestions             # add ZSH Syntax Highlighting
@@ -87,6 +99,7 @@ alias ls='ls --color'
 alias R='reset'
 alias C='clear'
 alias E='exit'
+alias Ex='explorer.exe'
 alias N='nvim'
 alias Sz='source ~/.zshrc'
 alias Nz='nvim ~/.zshrc'
@@ -103,6 +116,21 @@ eval "$(zoxide init --cmd cd zsh)"
 # MY CONFIG ---
 # Aliases
 alias lc="colorls --dark"
+alias chrome="chromium --disable-gpu --disable-gpu-compositing --disable-gpu-vsync --disable-software-rasterizer --enable-software-rendering-list"
+alias Dcdrive="cd /mnt/c/Users/marci/OneDrive/"
+alias neofetch="neofetch --ascii /home/ian/AsciiArt.txt"
+alias Tls="tmux list-sessions"
+alias Tks="tmux kill-session -t"
+
+# Alias for 'cs': change directory and run 'colorls --dark'
+cs() {
+    cd "$@" && colorls --dark
+}
+
+# Alias for 'csa': use 'cd -a' (if valid) and run 'colorls --dark'
+csa() {
+    cd "$@" && colorls -a --dark
+}
 
 # Options
 ZLE_RPROMPT_INDENT=0  # take off zsh line right prompt padding
