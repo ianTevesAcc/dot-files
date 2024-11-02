@@ -46,7 +46,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # ZSH Plugins
 zinit ice depth=1; zinit light romkatv/Powerlevel10k  # add PowerLevel10k
-zinit light zsh-users/zsh-syntax-highlighting         # add ZSH Syntax Highlighting
+# zinit light zsh-users/zsh-syntax-highlighting         # add ZSH Syntax Highlighting
 zinit light zsh-users/zsh-completions                 # add ZSH Completions
 zinit light zsh-users/zsh-autosuggestions             # add ZSH Syntax Highlighting
 zinit light Aloxaf/fzf-tab                            # add FZF
@@ -124,12 +124,12 @@ alias Tks="tmux kill-session -t"
 
 # Alias for 'cs': change directory and run 'colorls --dark'
 cs() {
-    cd "$@" && colorls --dark
+  cd "$@" && colorls --dark
 }
 
 # Alias for 'csa': use 'cd -a' (if valid) and run 'colorls --dark'
 csa() {
-    cd "$@" && colorls -a --dark
+  cd "$@" && colorls -a --dark
 }
 
 # Options
