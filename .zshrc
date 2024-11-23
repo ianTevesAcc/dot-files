@@ -46,7 +46,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 # ZSH Plugins
 zinit ice depth=1; zinit light romkatv/Powerlevel10k  # add PowerLevel10k
-# zinit light zsh-users/zsh-syntax-highlighting         # add ZSH Syntax Highlighting
+zinit light zsh-users/zsh-syntax-highlighting         # add ZSH Syntax Highlighting
 zinit light zsh-users/zsh-completions                 # add ZSH Completions
 zinit light zsh-users/zsh-autosuggestions             # add ZSH Syntax Highlighting
 zinit light Aloxaf/fzf-tab                            # add FZF
@@ -101,6 +101,8 @@ alias C='clear'
 alias E='exit'
 alias Ex='explorer.exe'
 alias N='nvim'
+alias Nn='nvim ~/.config/nvim/'
+alias Tz='nvim ~/.tmux.conf'
 alias Sz='source ~/.zshrc'
 alias Nz='nvim ~/.zshrc'
 alias F='fzf'
@@ -112,25 +114,29 @@ eval "$(fzf --zsh)"
 source <(fzf --zsh)
 eval "$(zoxide init --cmd cd zsh)"
 
-
 # MY CONFIG ---
 # Aliases
-alias lc="colorls --dark"
-alias chrome="chromium --disable-gpu --disable-gpu-compositing --disable-gpu-vsync --disable-software-rasterizer --enable-software-rendering-list"
+alias lc="clear && pwd && colorls --dark"
+alias lca="clear && pwd && colorls --dark -a"
+alias lg="lazygit"
 alias Dcdrive="cd /mnt/c/Users/marci/OneDrive/"
 alias neofetch="neofetch --ascii /home/ian/AsciiArt.txt"
 alias Tls="tmux list-sessions"
 alias Tks="tmux kill-session -t"
+alias cover="clear && neofetch --ascii ~/.config/neofetch/anime-logo.txt && colorls --dark"
 
 # Alias for 'cs': change directory and run 'colorls --dark'
 cs() {
-  cd "$@" && colorls --dark
+  cd "$@" && clear && pwd && colorls --dark
 }
 
 # Alias for 'csa': use 'cd -a' (if valid) and run 'colorls --dark'
 csa() {
-  cd "$@" && colorls -a --dark
+  cd "$@" && clear && pwd && colorls -a --dark
 }
+
+# Alias to Directories
+alias OB="cs /mnt/d/PROBV"
 
 # Options
 ZLE_RPROMPT_INDENT=0  # take off zsh line right prompt padding
@@ -150,6 +156,17 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # FZF Styling
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
+# Apply Dracula colors to fzf-tab
+zstyle ':fzf-tab:complete:*' fzf-pad 1
+zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=plain {}'
+zstyle ':fzf-tab:complete:*' fzf '--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9,fg+:#f8f8f2,bg+:#44475a,hl+:#ff79c6,info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6,marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+
+# Customize colors for matches and completion preview
+zstyle ':fzf-tab:*' switch-color 'fg:#bd93f9'
+zstyle ':fzf-tab:*' header-color 'fg:#6272a4'
+zstyle ':fzf-tab:*' info-color 'fg:#ffb86c'
+zstyle ':fzf-tab:*' preview-color 'fg:#50fa7b'
+
 # To source oh-my-zsh ~ I haven't done this in this case for faster terminal loading
 #plugins=(git)  # to load plugins through the oh-my-zsh ~ I use OMZP instead
 #source $ZSH/oh-my-zsh.sh
@@ -157,5 +174,8 @@ export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Add shell integration
+source <(fzf --zsh)
 
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
